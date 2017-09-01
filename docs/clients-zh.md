@@ -369,9 +369,12 @@ strongswan down myvpn
 要解决此错误，在首次连接之前需要<a href="https://documentation.meraki.com/MX-Z/Client_VPN/Troubleshooting_Client_VPN#Windows_Error_809" target="_blank">修改一次注册表</a>，以解决 VPN 服务器 和/或 客户端与 NAT （比如家用路由器）的兼容问题。请参照链接网页中的说明，或者打开<a href="http://www.cnblogs.com/xxcanghai/p/4610054.html" target="_blank">提升权限命令提示符</a>并运行以下命令。完成后必须重启计算机。
 
 - 适用于 Windows Vista, 7, 8 和 10
-  ```console
+  - 命令行输入
+  ```console
   REG ADD HKLM\SYSTEM\CurrentControlSet\Services\PolicyAgent /v AssumeUDPEncapsulationContextOnSendRule /t REG_DWORD /d 0x2 /f
+  REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\RasMan\Parameters /v ProhibitIpSec /t REG_DWORD /d 0x0 /f
   ```
+  - 确保服务**Remote Access Auto Connection Manager**，**Remote Access Connection Manager**，**Secure Socket Tunneling Protocol Service**已启动，操作方法为`开始菜单->控制面板->管理工具->服务->启动上述三种服务（右键->启动）并设置上述三种服务为自启动（右键->属性->启动类型->自动）`
 
 - 仅适用于 Windows XP
   ```console
